@@ -1,0 +1,110 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+	setlocale(0, "");
+	int ch_p = 0;
+
+	while (true)
+	{
+		cout << "Выбор пункта: ";
+
+		cin >> ch_p;
+		cout << "\n";
+		switch (ch_p) {
+
+		case 0:
+		{
+			cout << "Конец \n\n";
+			return 0;
+		}
+
+		case 1:
+		{
+			cout << "Размеры типов данных в байтах \n";
+			cout << "int: " << sizeof(int) << " байт(а)" << endl;
+			cout << "short int: " << sizeof(short int) << " байт(а)" << endl;
+			cout << "long int: " << sizeof(long int) << " байт(а)" << endl;
+			cout << "double: " << sizeof(double) << " байт(а)" << endl;
+			cout << "long double: " << sizeof(long double) << " байт(а)" << endl;
+			cout << "char: " << sizeof(char) << " байт(а)" << endl;
+			cout << "bool: " << sizeof(bool) << " байт(а)" << endl;
+			cout << "\n\n";
+		}
+		break;
+
+		case 2:
+		{
+			cout << "Введите число типа int:  ";
+			unsigned int bt = 32, masks = 1 << (bt - 1);
+			int int_numb;
+
+			cin >> int_numb;
+			for (int i = 1; i <= bt; i++)
+			{
+				putchar(int_numb & masks ? '1' : '0');
+				int_numb <<= 1;
+				cout << (i == 1 || i % 8 == 0 ? " " : "");
+			}
+			cout << "\n\n\n";
+		}
+		break;
+
+		case 3: {
+			unsigned int bt = 32, masks = 1 << (bt - 1);
+			string s;
+			char bit;
+			union
+			{
+				int int_Float;
+				float float_Num;
+			};
+			bt = sizeof(int) * 8;
+			masks = 1 << bt - 1;
+			cout << "Введите число типа float: ";
+			cin >> float_Num;
+			for (int i = 1; i <= bt; i++)
+			{
+				bit = putchar(int_Float & masks ? '1' : '0');
+				s = s + bit;
+				int_Float <<= 1;
+				if (i == 1 || i == 9)
+					putchar(' ');
+
+			}
+			cout << "\n\n\n";
+		}
+		break;
+		case 4:
+		{
+			unsigned int bt = 32, masks = 1 << (bt - 1);
+			string s;
+			char bit;
+			int count_i = 1;
+			cout << "Введите число типа double: ";
+			union 
+			{
+				int int_double[2];
+				double double_Num;
+			};
+			bt = sizeof(double) * 8;
+			masks = 1 << bt - 1;
+			cin >> double_Num;
+			for (int i = 1; i >= 0; i--) {
+				for (int j = 1; j <= bt / 2; j++) {
+					bit = putchar(int_double[i] & masks ? '1' : '0');
+					s = s + bit;
+					int_double[i] <<= 1;
+					if (count_i == 1 || count_i == 12)
+						putchar(' ');
+					count_i += 1;
+
+				}
+			}
+
+		}
+		cout << "\n\n\n";
+		}
+	}
+	return 0;
+}
